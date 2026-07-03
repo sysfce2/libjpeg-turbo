@@ -1,3 +1,15 @@
+3.2.1
+=====
+
+### Significant changes relative to 3.2.0:
+
+1. Fixed a regression introduced by 3.2 beta1[9] that broke Un*x builds in
+which position-independent code (PIC) was not enabled for static libraries.
+This issue could be worked around by explicitly setting the
+`CMAKE_POSITION_INDEPENDENT_CODE` CMake variable or using a toolchain, such as
+the ones provided by Ubuntu, that automatically enables PIC.
+
+
 3.2.0
 =====
 
