@@ -17,6 +17,15 @@ is approximately 10-17% (avg. 13%) faster (relative to libjpeg-turbo 3.2.0)
 with GCC 14 and 1-8% (avg. 4%) faster with Clang 20.  (Tested on a 1.6 GHz Ky
 X1 CPU.  Actual mileage may vary.)
 
+3. Symbols from the in-tree zlib and libspng implementations introduced by
+3.2 beta1[9] are now hidden, which prevents the symbols from being exposed in
+downstream shared libraries and applications that link with the static
+TurboJPEG API library.  Symbols from the in-tree zlib implementation are now
+also renamed, which prevents downstream shared libraries and applications that
+link with the static TurboJPEG API library from accidentally calling the
+in-tree zlib implementation when they intend to call the system-supplied zlib
+implementation.
+
 
 3.2.0
 =====

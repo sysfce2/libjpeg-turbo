@@ -8,6 +8,8 @@ if(NOT WITH_SYSTEM_ZLIB)
     ${SRC}/zlib/inflate.c ${SRC}/zlib/inftrees.c ${SRC}/zlib/trees.c
     ${SRC}/zlib/zutil.c)
 
+  target_compile_definitions(zlib PRIVATE Z_PREFIX)
+
   if(CMAKE_COMPILER_IS_GNUCC OR CMAKE_C_COMPILER_ID MATCHES "Clang")
     target_compile_options(zlib PRIVATE -w)
     if(NOT WIN32)
@@ -23,6 +25,10 @@ include_directories(${SRC})
 add_definitions(-DSPNG_STATIC)
 
 add_library(spng OBJECT ${SRC}/spng.c)
+
+if(NOT WITH_SYSTEM_ZLIB)
+  target_compile_definitions(spng PRIVATE Z_PREFIX)
+endif()
 
 if(CMAKE_COMPILER_IS_GNUCC OR CMAKE_C_COMPILER_ID MATCHES "Clang")
   target_compile_options(spng PRIVATE -w)

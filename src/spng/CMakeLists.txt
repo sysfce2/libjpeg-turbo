@@ -9,6 +9,8 @@ if(NOT WITH_SYSTEM_ZLIB)
     set_target_properties(zlib-static PROPERTIES POSITION_INDEPENDENT_CODE 1)
   endif()
 
+  target_compile_definitions(zlib-static PRIVATE Z_PREFIX)
+
   if(CMAKE_COMPILER_IS_GNUCC OR CMAKE_C_COMPILER_ID MATCHES "Clang")
     target_compile_options(zlib-static PRIVATE -w)
     if(NOT WIN32)
@@ -27,6 +29,10 @@ add_library(spng-static OBJECT spng.c)
 
 if(NOT WIN32 AND (CMAKE_POSITION_INDEPENDENT_CODE OR ENABLE_SHARED))
   set_target_properties(spng-static PROPERTIES POSITION_INDEPENDENT_CODE 1)
+endif()
+
+if(NOT WITH_SYSTEM_ZLIB)
+  target_compile_definitions(spng-static PRIVATE Z_PREFIX)
 endif()
 
 if(CMAKE_COMPILER_IS_GNUCC OR CMAKE_C_COMPILER_ID MATCHES "Clang")
