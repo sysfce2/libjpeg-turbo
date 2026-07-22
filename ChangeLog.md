@@ -26,6 +26,10 @@ link with the static TurboJPEG API library from accidentally calling the
 in-tree zlib implementation when they intend to call the system-supplied zlib
 implementation.
 
+4. Fixed an integer overflow and subsequent buffer overrun that occurred when
+attempting to use `tj3LoadImage12()` or `tj3LoadImage16()` from a 32-bit build
+of libjpeg-turbo to load a packed-pixel image with more than 2^31 components.
+
 
 3.2.0
 =====
