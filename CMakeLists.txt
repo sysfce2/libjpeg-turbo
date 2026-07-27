@@ -519,26 +519,17 @@ if(UNIX)
   if(CMAKE_CROSSCOMPILING)
     set(RIGHT_SHIFT_IS_UNSIGNED 0)
   else()
-    include(CheckCSourceRuns)
-    check_c_source_runs("
-      #include <stdio.h>
-      #include <stdlib.h>
-      static int is_shifting_signed (long arg) {
-        long res = arg >> 4;
-        if (res == -0x7F7E80CL)
-          return 1; /* right shift is signed */
-        /* see if unsigned-shift hack will fix it. */
-        /* we can't just test exact value since it depends on width of long... */
-        res |= 0xFFFFFFFFL << (32-4);
-        if (res == -0x7F7E80CL)
-          return 0; /* right shift is unsigned */
-        printf(\"Right shift isn't acting as I expect it to.\\\\n\");
-        printf(\"I fear the JPEG software will not work at all.\\\\n\\\\n\");
-        return 0; /* try it with unsigned anyway */
-      }
-      int main (void) {
-        exit(is_shifting_signed(-0x7F7E80B1L));
-      }" RIGHT_SHIFT_IS_UNSIGNED)
+    try_run(RIGHT_SHIFT_IS_UNSIGNED RIGHT_SHIFT_IS_UNSIGNED_COMPILES
+      ${CMAKE_CURRENT_BINARY_DIR}
+      ${CMAKE_SOURCE_DIR}/cmakescripts/right_shift_is_unsigned.c)
+    if(RIGHT_SHIFT_IS_UNSIGNED EQUAL 1)
+      message(STATUS "Right shift is unsigned")
+    elseif(RIGHT_SHIFT_IS_UNSIGNED EQUAL 0)
+      message(STATUS "Right shift is signed")
+    else()
+      message(FATAL_ERROR
+        "Could not determine whether right shift is signed or unsigned.")
+    endif()
   endif()
 endif()
 
