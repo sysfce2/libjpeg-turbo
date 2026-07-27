@@ -10,5 +10,5 @@ int main(void) {
   if (res == -0x7F7E80CL)
     return 1; /* right shift is unsigned */
 
-  return -1; /* fatal error */
+  return 2; /* fatal error */
 }
