@@ -123,7 +123,7 @@ Macros</h2></td></tr>
 <tr class="memdesc:ga319826b7eb1583c0595bbe7b95428709"><td class="mdescLeft">&#160;</td><td class="mdescRight">Discard any partial iMCUs that cannot be transformed.  <br /></td></tr>
 <tr class="separator:ga319826b7eb1583c0595bbe7b95428709"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga9c771a757fc1294add611906b89ab2d2" id="r_ga9c771a757fc1294add611906b89ab2d2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___turbo_j_p_e_g.html#ga9c771a757fc1294add611906b89ab2d2">TJXOPT_CROP</a></td></tr>
-<tr class="memdesc:ga9c771a757fc1294add611906b89ab2d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable lossless cropping.  <br /></td></tr>
+<tr class="memdesc:ga9c771a757fc1294add611906b89ab2d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable lossless cropping of the transformed image.  <br /></td></tr>
 <tr class="separator:ga9c771a757fc1294add611906b89ab2d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga3acee7b48ade1b99e5588736007c2589" id="r_ga3acee7b48ade1b99e5588736007c2589"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___turbo_j_p_e_g.html#ga3acee7b48ade1b99e5588736007c2589">TJXOPT_GRAY</a></td></tr>
 <tr class="memdesc:ga3acee7b48ade1b99e5588736007c2589"><td class="mdescLeft">&#160;</td><td class="mdescRight">Discard the color data in the source image, and generate a grayscale destination image.  <br /></td></tr>
@@ -610,8 +610,8 @@ scalingFactor)</code>. </p>
       </table>
 </div><div class="memdoc">
 
-<p>Enable lossless cropping. </p>
-<p>See <a class="el" href="group___turbo_j_p_e_g.html#gaff23ba1dcabed456794b844791613920" title="Losslessly transform a JPEG image into another JPEG image.">tj3Transform()</a> for more information. </p>
+<p>Enable lossless cropping of the transformed image. </p>
+<p>(Cropping is performed after any other transformation operations.) See <a class="el" href="group___turbo_j_p_e_g.html#gaff23ba1dcabed456794b844791613920" title="Losslessly transform a JPEG image into another JPEG image.">tj3Transform()</a> for more information. </p>
 
 </div>
 </div>
@@ -1168,7 +1168,7 @@ scalingFactor)</code>. </p>
 <tr><td class="fieldname"><a id="gga1d047060ea80bb9820d540bb928e9074ac124fa8f6cb41147e3d670dfbdfb7173" name="gga1d047060ea80bb9820d540bb928e9074ac124fa8f6cb41147e3d670dfbdfb7173"></a>TJSAMP_UNKNOWN&#160;</td><td class="fielddoc"><p>Unknown subsampling. </p>
 <p>The JPEG image uses an unusual type of chrominance subsampling. Such images can be decompressed into packed-pixel images, but they cannot be</p><ul>
 <li>decompressed into planar YUV images,</li>
-<li>losslessly transformed if <a class="el" href="group___turbo_j_p_e_g.html#ga9c771a757fc1294add611906b89ab2d2" title="Enable lossless cropping.">TJXOPT_CROP</a> is specified and <a class="el" href="group___turbo_j_p_e_g.html#ga3acee7b48ade1b99e5588736007c2589" title="Discard the color data in the source image, and generate a grayscale destination image.">TJXOPT_GRAY</a> is not specified, or</li>
+<li>losslessly transformed if <a class="el" href="group___turbo_j_p_e_g.html#ga9c771a757fc1294add611906b89ab2d2" title="Enable lossless cropping of the transformed image.">TJXOPT_CROP</a> is specified and <a class="el" href="group___turbo_j_p_e_g.html#ga3acee7b48ade1b99e5588736007c2589" title="Discard the color data in the source image, and generate a grayscale destination image.">TJXOPT_GRAY</a> is not specified, or</li>
 <li>partially decompressed using a cropping region. </li>
 </ul>
 </td></tr>

@@ -1088,7 +1088,9 @@ enum TJXOP {
  */
 #define TJXOPT_TRIM  (1 << 1)
 /**
- * Enable lossless cropping.  See #tj3Transform() for more information.
+ * Enable lossless cropping of the transformed image.  (Cropping is performed
+ * after any other transformation operations.)  See #tj3Transform() for more
+ * information.
  */
 #define TJXOPT_CROP  (1 << 2)
 /**
@@ -1146,20 +1148,22 @@ typedef struct {
 } tjscalingfactor;
 
 /**
- * Cropping region
+ * Cropping region.  Note that lossless cropping is performed after any other
+ * transformation operations, so the coordinates and iMCU dimensions are
+ * relative to the flipped/rotated/tranposed image.
  */
 typedef struct {
   /**
    * The left boundary of the cropping region.  For lossless transformation,
    * this must be evenly divisible by the iMCU width (see #tjMCUWidth) of the
-   * destination image.  For decompression, this must be evenly divisible by
+   * transformed image.  For decompression, this must be evenly divisible by
    * the scaled iMCU width of the source image.
    */
   int x;
   /**
    * The upper boundary of the cropping region.  For lossless transformation,
    * this must be evenly divisible by the iMCU height (see #tjMCUHeight) of the
-   * destination image.
+   * transformed image.
    */
   int y;
   /**

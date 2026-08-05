@@ -1,4 +1,4 @@
-.TH JPEGTRAN 1 "19 Mar 2026"
+.TH JPEGTRAN 1 "5 Aug 2026"
 .SH NAME
 jpegtran \- lossless transformation of JPEG files
 .SH SYNOPSIS
@@ -175,6 +175,10 @@ to the nearest iMCU boundary (the lower right corner is unchanged.)  Thus, the
 output image covers at least the requested region, but it may cover more.  The
 adjustment of the region dimensions may be optionally disabled by attaching
 an 'f' character ("force") to the width or height number.
+
+Note that lossless cropping is performed after any other oeprations, so the
+coordinates and iMCU boundaries are relative to the flipped/rotated/tranposed
+image.
 
 The image can be losslessly cropped by giving the switch:
 .TP

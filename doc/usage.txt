@@ -720,6 +720,10 @@ image covers at least the requested region, but it may cover more.  The
 adjustment of the region dimensions may be optionally disabled by attaching an
 'f' character ("force") to the width or height number.
 
+Note that lossless cropping is performed after any other operations, so the
+coordinates and iMCU boundaries are relative to the flipped/rotated/tranposed
+image.
+
 The image can be losslessly cropped by giving the switch:
         -crop WxH+X+Y   Crop to a rectangular region of width W and height H,
                         starting at point X,Y.
