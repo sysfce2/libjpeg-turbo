@@ -30,6 +30,10 @@ implementation.
 attempting to use `tj3LoadImage12()` or `tj3LoadImage16()` from a 32-bit build
 of libjpeg-turbo to load a packed-pixel image with more than 2^31 components.
 
+5. Fixed a division-by-zero error that occurred when attempting to load a
+non-grayscale indexed-color PNG image using `tj3LoadImage*()` if the pixel
+format of the packed-pixel buffer was unspecified (`TJPF_UNKNOWN`.)
+
 
 3.2.0
 =====
