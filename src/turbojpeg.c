@@ -2294,7 +2294,15 @@ DLLEXPORT int tj3DecompressToYUVPlanes8(tjhandle handle,
   CATCH_LIBJPEG(this);
 
   dinfo->do_fancy_upsampling = !this->fastUpsample;
-  dinfo->dct_method = this->fastDCT ? JDCT_FASTEST : JDCT_ISLOW;
+  /* Referring to the comment below, this function will never use the "fast"
+     IDCT algorithm with decompression scaling, so if the scaling factor is not
+     1/1, we need to explicitly set dinfo->dct_method = JDCT_ISLOW so that the
+     "slow" IDCT tables will be assigned to all components.  Otherwise, when
+     libjpeg tries to be clever, it will assign the "fast" IDCT tables to the
+     chrominance components, and those tables don't work properly with the
+     scaled IDCT algorithms. */
+  dinfo->dct_method =
+    (dctsize == DCTSIZE && this->fastDCT) ? JDCT_FASTEST : JDCT_ISLOW;
   dinfo->raw_data_out = TRUE;
 
   dinfo->mem->max_memory_to_use = (long)this->maxMemory * 1048576L;

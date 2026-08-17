@@ -543,6 +543,7 @@ static void _decompTest(tjhandle handle, unsigned char *jpegBuf,
   tjhandle handle2 = NULL;
 
   TRY_TJ(handle, tj3SetScalingFactor(handle, sf));
+  TRY_TJ(handle, tj3Set(handle, TJPARAM_FASTDCT, 0));
 
   TRY_TJ(handle, tj3DecompressHeader(handle, jpegBuf, jpegSize));
   _hdrw = tj3Get(handle, TJPARAM_JPEGWIDTH);
@@ -571,6 +572,12 @@ static void _decompTest(tjhandle handle, unsigned char *jpegBuf,
     if (sf.num != 1 || sf.denom != 1)
       printf("%d/%d ... ", sf.num, sf.denom);
     else printf("... ");
+
+    /* This should have no effect, but it will cause libjpeg-turbo 3.2.0 and
+       prior to produce incorrect chrominance values when decompressing a
+       4:2:0, 4:1:0, or 2:4 JPEG image with a scaling factor of 1/2. */
+    if (sf.num != 1 || sf.denom != 1)
+      TRY_TJ(handle, tj3Set(handle, TJPARAM_FASTDCT, 1));
 
     memset(yuvBuf, 0, yuvSize);
     TRY_TJ(handle, tj3DecompressToYUV8(handle, jpegBuf, jpegSize, yuvBuf,

@@ -34,6 +34,12 @@ of libjpeg-turbo to load a packed-pixel image with more than 2^31 components.
 non-grayscale indexed-color PNG image using `tj3LoadImage*()` if the pixel
 format of the packed-pixel buffer was unspecified (`TJPF_UNKNOWN`.)
 
+6. Fixed an issue whereby `tj3DecompressToYUV*()` produced incorrect
+chrominance values when decompressing a 4:2:0, 4:1:0, or 2:4 JPEG image with
+the "fast" IDCT algorithm and a scaling factor of 1/2.  (In other words,
+`TJPARAM_FASTDCT` was not ignored as it should be when decompression scaling is
+enabled.)
+
 
 3.2.0
 =====
