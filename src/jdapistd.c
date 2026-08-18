@@ -282,7 +282,8 @@ _jpeg_crop_scanline(j_decompress_ptr cinfo, JDIMENSION *xoffset,
                                        compptr->_DCT_scaled_size),
                                 (long)(cinfo->max_h_samp_factor *
                                        cinfo->_min_DCT_scaled_size));
-    if (compptr->downsampled_width < 2 && orig_downsampled_width >= 2)
+    if (compptr->downsampled_width < 2 && orig_downsampled_width >= 2 &&
+        !master->using_merged_upsample)
       reinit_upsampler = TRUE;
 
     /* Set the first and last iMCU columns that we must decompress.  These

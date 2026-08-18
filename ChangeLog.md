@@ -40,6 +40,12 @@ the "fast" IDCT algorithm and a scaling factor of 1/2.  (In other words,
 `TJPARAM_FASTDCT` was not ignored as it should be when decompression scaling is
 enabled.)
 
+7. Fixed a buffer overrun and subsequent segfault that occurred on certain
+platforms when attempting to partially decompress a specially-crafted 4:2:0
+JPEG image using the merged (non-fancy) upsampling algorithm with the
+libjpeg-turbo SIMD extensions disabled and a cropping region that would have
+caused any of the component planes to be cropped to a width of 1 or 2 samples.
+
 
 3.2.0
 =====
